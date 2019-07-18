@@ -1,17 +1,24 @@
 package com.thoughtworks.parking_lot;
 
 
+import com.alibaba.fastjson.JSON;
 import com.thoughtworks.parking_lot.entity.ParkingLot;
 import com.thoughtworks.parking_lot.respository.ParkingLotRepository;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Date;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -19,28 +26,14 @@ import java.util.Date;
 public class ParkingLotTest {
 
     @Autowired
-    private ParkingLotRepository parkingLotRepository;
+    private MockMvc mockMvc;
 
     @Test
-    public void should_return_case_when_find_by_id() {
-        //given
-//        CriminalCase criminalCase_1 = new CriminalCase("aaa",new Date(1000));
-//        CriminalCase criminalCase_2 = new CriminalCase("bbb",new Date(2000));
-//
-//        criminalCaseRepository.save(criminalCase_1);
-//        criminalCaseRepository.save(criminalCase_2);
-//
-//        //when
-//        CriminalCase resultCase  = criminalCaseRepository.findById(criminalCase_1.getId()).get();
-//
-//        //then
-//        Assertions.assertEquals(criminalCase_1, resultCase);
-        ParkingLot parkingLot1 = new ParkingLot("aaa",20,"aaa");
-        ParkingLot parkingLot2 = new ParkingLot("bbb",30,"bbb");
-        parkingLotRepository.save(parkingLot1);
-        parkingLotRepository.save(parkingLot2);
+    public void should_return_case_when_find_by_id()throws Exception{
+        ParkingLot parkingLot = new ParkingLot("bbb",12,"qqq");
+        String jsonString = JSON.toJSONString(parkingLot);
 
-        Assertions.assertEquals(2, parkingLotRepository.findAll().size());
-
+        this.mockMvc.perform(post("/parkinglots").contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(jsonString)).andExpect(status().isOk());
     }
 }
