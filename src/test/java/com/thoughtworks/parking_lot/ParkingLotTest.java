@@ -54,5 +54,17 @@ public class ParkingLotTest {
 
     }
 
+    @Test
+    public void r2eturn_parkinglot_list_when_find_by_page() throws Exception {
+
+        String uuid = "8aee9r5b6c0518ab016c05344de50000";
+        String content = mockMvc.perform(get("/parkinglots/"+uuid)).andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        JSONObject jsonObject = new JSONObject(content);
+        assertEquals("{\"name\":\"DDD\",\"location\":\"VVV\",\"id\":\"8aee9r5b6c0518ab016c05344de50000\",\"capacity\":18}", jsonObject.toString());
+
+
+    }
+
 
 }

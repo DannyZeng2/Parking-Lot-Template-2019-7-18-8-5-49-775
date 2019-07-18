@@ -33,4 +33,8 @@ public class ParkingLotService {
     }
 
 
+    public ParkingLot findById(String id) {
+        return parkingLotRepository.findById(id).get();
+
+    }
 }
