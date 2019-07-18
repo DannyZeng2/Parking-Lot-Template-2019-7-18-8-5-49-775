@@ -19,8 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -33,7 +32,7 @@ public class ParkingLotTest {
     private MockMvc mockMvc;
 
     @Test
-    public void should_return_case_when_find_by_id()throws Exception{
+    public void should_new_parkinglot_list_case_when_add_parkinglot()throws Exception{
         ParkingLot parkingLot = new ParkingLot("bbb",12,"qqq");
         String jsonString = JSON.toJSONString(parkingLot);
 
@@ -42,13 +41,18 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void return_new_company_list_when_delete_a_company() throws Exception {
+    public void return_new_parkinglot_list_when_delete_a_parkinglot() throws Exception {
         String uuid = "8w5e9d5t6c0518ab016c05344de50000";
         this.mockMvc.perform(delete("/parkinglots/"+uuid)).andExpect(status().isOk());
 
     }
 
+    @Test
+    public void return_parkinglot_list_when_find_by_page() throws Exception {
 
+        this.mockMvc.perform(get("/parkinglots").param("page","2").param("pageSize","3")).andExpect(status().isOk());
+
+    }
 
 
 }

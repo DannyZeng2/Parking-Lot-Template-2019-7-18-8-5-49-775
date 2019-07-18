@@ -33,8 +33,8 @@ public class ParkingLotController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping(params = {"page","pageSize"})
-    public ResponseEntity findParkingLotByPage(@PathVariable("page") int page,@PathVariable("pageSize") int pageSize) {
+    @GetMapping(params = {"page","pageSize"})
+    public ResponseEntity findParkingLotByPage(@RequestParam("page") int page,@RequestParam("pageSize") int pageSize) {
 
         return ResponseEntity.ok().body(parkingLotService.findByPage(page,pageSize));
     }
