@@ -1,27 +1,42 @@
 package com.thoughtworks.parking_lot.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "PARKING_LOT")
 public class ParkingLot {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid",strategy = "uuid")
+    private String id;
 
-    @Column(unique = true)
+    @Column(name = "NAME",unique = true)
     private String name;
 
+    @Column(name = "CAPACITY")
     private int capacity;
 
+    @Column(name = "LOCATION")
     private String location;
 
-    public Long getId() {
+    public ParkingLot() {
+
+    }
+
+    public ParkingLot(String name, int capacity, String location) {
+        this.name = name;
+        this.capacity = capacity;
+        this.location = location;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
