@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ParkingLotService {
@@ -35,6 +36,16 @@ public class ParkingLotService {
 
     public ParkingLot findById(String id) {
         return parkingLotRepository.findById(id).get();
+
+    }
+
+    public ParkingLot updateCapacityById(String id,int capacity) {
+
+
+        ParkingLot parkingLot = parkingLotRepository.findById(id).get();
+        parkingLot.setCapacity(capacity);
+
+        return parkingLot;
 
     }
 }

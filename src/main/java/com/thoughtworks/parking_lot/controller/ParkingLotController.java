@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -40,9 +41,17 @@ public class ParkingLotController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity findParkingLotById(@PathVariable("id") String id) {
+    public ResponseEntity findParkingLotById(@PathVariable String id) {
 
         return ResponseEntity.ok().body(parkingLotService.findById(id));
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity updateParkingLotById(@PathVariable String id,@RequestParam("capacity") int capacity) {
+
+        ParkingLot parkingLot = parkingLotService.updateCapacityById(id,capacity);
+
+        return ResponseEntity.ok().body(parkingLot);
     }
 
 
