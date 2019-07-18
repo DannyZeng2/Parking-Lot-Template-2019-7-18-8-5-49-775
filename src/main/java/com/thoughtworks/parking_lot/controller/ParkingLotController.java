@@ -4,6 +4,7 @@ import com.thoughtworks.parking_lot.entity.ParkingLot;
 import com.thoughtworks.parking_lot.respository.ParkingLotRepository;
 import com.thoughtworks.parking_lot.service.ParkingLotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,10 +20,26 @@ public class ParkingLotController {
     private ParkingLotService parkingLotService;
 
     @PostMapping(produces = {"application/json"})
-    public ResponseEntity add(@RequestBody ParkingLot parkingLot) {
+    public ResponseEntity addParkingLot(@RequestBody ParkingLot parkingLot) {
         parkingLotService.addParkingLot(parkingLot);
 
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteParkingLot(@PathVariable("id") String id) {
+
+        parkingLotService.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping(params = {"page","pageSize"})
+    public ResponseEntity findParkingLotByPage(@PathVariable("page") int page,@PathVariable("pageSize") int pageSize) {
+
+        return ResponseEntity.ok().body(parkingLotService.findByPage(page,pageSize));
+    }
+
+
+
 
 }
