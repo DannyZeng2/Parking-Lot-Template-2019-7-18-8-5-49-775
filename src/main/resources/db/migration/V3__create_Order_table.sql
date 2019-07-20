@@ -1,9 +1,9 @@
 create table PARKING_LOT_ORDER (
     id varchar PRIMARY KEY,
-    parkingLotName varchar,
-    CarNum varchar,
-    startTime date,
-    endTime date,
-    state int,
+    PARKING_LOT_NAME varchar,
+    CAR_NUM varchar,
+    START_NAME date,
+    END_NAME date,
+    STATE int,
     PARKING_LOT_ID varchar
 );

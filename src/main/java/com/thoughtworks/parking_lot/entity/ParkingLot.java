@@ -1,5 +1,6 @@
 package com.thoughtworks.parking_lot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -25,7 +26,7 @@ public class ParkingLot {
     private String location;
 
     @OneToMany(mappedBy="parkingLot",cascade = CascadeType.ALL)
-    private List<Order> orders;
+    private List<ParkingOrder> parkingOrders;
 
     public ParkingLot() {
 
@@ -67,5 +68,14 @@ public class ParkingLot {
 
     public void setLocation(java.lang.String location) {
         this.location = location;
+    }
+
+    @JsonIgnore
+    public List<ParkingOrder> getParkingOrders() {
+        return parkingOrders;
+    }
+
+    public void setParkingOrders(List<ParkingOrder> parkingOrders) {
+        this.parkingOrders = parkingOrders;
     }
 }
