@@ -3,6 +3,8 @@ package com.thoughtworks.parking_lot.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.awt.*;
+import java.util.List;
 
 @Entity
 @Table(name = "PARKING_LOT")
@@ -21,6 +23,9 @@ public class ParkingLot {
 
     @Column(name = "LOCATION")
     private String location;
+
+    @OneToMany(mappedBy="parkingLot",cascade = CascadeType.ALL)
+    private List<Order> orders;
 
     public ParkingLot() {
 
