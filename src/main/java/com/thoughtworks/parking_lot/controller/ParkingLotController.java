@@ -55,6 +55,12 @@ public class ParkingLotController {
         return ResponseEntity.ok().body(parkingLot);
     }
 
+    @PostMapping(value = "/{id}",produces = {"application/json"})
+    public ResponseEntity parkCar(@PathVariable String id,@RequestBody ParkingOrder parkingOrder) {
+        parkingLotService.addCar(id,parkingOrder);
+        return ResponseEntity.ok().build();
+    }
+
 
 
 

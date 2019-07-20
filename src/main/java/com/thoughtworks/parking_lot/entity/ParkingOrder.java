@@ -38,6 +38,14 @@ public class ParkingOrder {
         this.parkingLot = parkingLot;
     }
 
+    public ParkingOrder(String parkingLotName, String carNum, Date startTime, Date endTime, int state) {
+        this.parkingLotName = parkingLotName;
+        this.carNum = carNum;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.state = state;
+    }
+
     public ParkingOrder() {
 
     }

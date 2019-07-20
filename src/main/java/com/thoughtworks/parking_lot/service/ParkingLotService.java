@@ -45,12 +45,23 @@ public class ParkingLotService {
 
         ParkingLot parkingLot = parkingLotRepository.findById(id).get();
         parkingLot.setCapacity(capacity);
-
         return parkingLot;
 
     }
 
     public void createOrdder(ParkingOrder parkingOrder) {
+
+    }
+
+    public void addCar(String id, ParkingOrder parkingOrder) {
+        ParkingLot parkingLot = parkingLotRepository.findById(id).get();
+        if(parkingLot.getParkingOrders().size()>=parkingLot.getCapacity()){
+            System.out.println("停车场已经满");
+        }else {
+            parkingLot.getParkingOrders().add(parkingOrder);
+            parkingLotRepository.saveAndFlush(parkingLot);
+        }
+
 
     }
 }

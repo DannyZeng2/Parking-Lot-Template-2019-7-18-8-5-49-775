@@ -35,7 +35,7 @@ public class ParkingOrderTest {
 
     @Test
     public void should_new_parking_order_list_case_when_add_parkingorder()throws Exception{
-            ParkingLot parkingLot = new ParkingLot("PL4",12,"RRR");
+        ParkingLot parkingLot = new ParkingLot("PL4",12,"RRR");
 
         //String parkingLotName, String carNum, Date startTime, Date endTime, int state, ParkingLot parkingLot
         ParkingOrder parking0rder = new ParkingOrder("PL4","A2343",new Date(20190304),new Date(20190304),1,parkingLot);
@@ -46,7 +46,7 @@ public class ParkingOrderTest {
     }
 
     @Test
-    public void return_parkingorder_info_when_get_by_id() throws Exception {
+    public void return_update_state_and_endTime_when_park_car_by_carNum() throws Exception {
         String uuid = "8a5e9d5b6c0518ab016c054344rewqq0";
 
         String content = mockMvc.perform(get("/parkingorders").param("carNum","A1223")).andExpect(status().isOk())
@@ -55,4 +55,6 @@ public class ParkingOrderTest {
         assertEquals(0, jsonObject.get("state"));
         assertEquals(new Date(System.currentTimeMillis()).toString(), jsonObject.get("endTime"));
     }
+
+
 }

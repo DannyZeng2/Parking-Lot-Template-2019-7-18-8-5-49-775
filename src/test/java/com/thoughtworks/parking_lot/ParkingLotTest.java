@@ -3,6 +3,7 @@ package com.thoughtworks.parking_lot;
 
 import com.alibaba.fastjson.JSON;
 import com.thoughtworks.parking_lot.entity.ParkingLot;
+import com.thoughtworks.parking_lot.entity.ParkingOrder;
 import com.thoughtworks.parking_lot.respository.ParkingLotRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,8 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -50,7 +52,6 @@ public class ParkingLotTest {
         String uuid = "8w5e9d5t6c0518ab016c05344de50000";
         this.mockMvc.perform(delete("/parkinglots/"+uuid)).andExpect(status().isOk());
 
-
     }
 
     @Test
@@ -69,11 +70,11 @@ public class ParkingLotTest {
     @Test
     public void return_parkinglot_info__when_find_by_id() throws Exception {
 
-        String uuid = "8aee9r5b6c0518ab016c05344de50000";
+        String uuid = "8a5e9d5b6c0518ab016c05344de50000";
         String content = mockMvc.perform(get("/parkinglots/"+uuid)).andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
         JSONObject jsonObject = new JSONObject(content);
-        assertEquals("{\"name\":\"P4\",\"location\":\"VVV\",\"id\":\"8aee9r5b6c0518ab016c05344de50000\",\"capacity\":18}", jsonObject.toString());
+        assertEquals("{\"name\":\"P1\",\"parkingOrders\":[{\"carNum\":\"A1223\",\"startTime\":\"2019-04-03\",\"id\":\"8a5e9d5b6c0518ab013ewereeww20000\",\"endTime\":\"2019-04-05\",\"state\":0,\"parkingLotName\":\"PL1\"}],\"location\":\"VVV\",\"id\":\"8a5e9d5b6c0518ab016c05344de50000\",\"capacity\":18}", jsonObject.toString());
     }
 
     @Test
@@ -85,5 +86,21 @@ public class ParkingLotTest {
         JSONObject jsonObject = new JSONObject(content);
         assertEquals(100, jsonObject.get("capacity"));
     }
+    @Test
+    public void should_return_error_message_when_capacity_is_full()throws Exception{
+
+        String uuid = "8w5e9d5t6c0518ab016c05344de50000";
+        ParkingOrder parking0rder = new ParkingOrder("PL2","A2743",new java.sql.Date(20190504),new Date(20190506),1);
+
+        String jsonString = JSON.toJSONString(parking0rder);
+
+        this.mockMvc.perform(post("/parkinglots/" + uuid).contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(jsonString)).andExpect(status().isOk());
+
+
+
+
+    }
+
 
 }

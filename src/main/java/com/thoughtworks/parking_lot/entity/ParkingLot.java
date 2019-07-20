@@ -70,7 +70,7 @@ public class ParkingLot {
         this.location = location;
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     public List<ParkingOrder> getParkingOrders() {
         return parkingOrders;
     }

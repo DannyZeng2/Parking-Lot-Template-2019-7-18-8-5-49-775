@@ -1,5 +1,5 @@
 INSERT into PARKING_LOT(id,name,capacity,location) VALUES ('8a5e9d5b6c0518ab016c05344de50000','P1',18,'VVV');
-INSERT into PARKING_LOT(id,name,capacity,location) VALUES ('8w5e9d5t6c0518ab016c05344de50000','P2',20,'VEV');
+INSERT into PARKING_LOT(id,name,capacity,location) VALUES ('8w5e9d5t6c0518ab016c05344de50000','P2',2,'VEV');
 INSERT into PARKING_LOT(id,name,capacity,location) VALUES ('8aee9r5b6c0518ab016c13324de50000','P3',18,'VVV');
 INSERT into PARKING_LOT(id,name,capacity,location) VALUES ('8aee9r5b6c0518ab016c05344de50000','P4',18,'VVV');
 INSERT into PARKING_LOT(id,name,capacity,location) VALUES ('8aee9r5b6c0518ab016c03334de50000','P5',18,'VTV');
